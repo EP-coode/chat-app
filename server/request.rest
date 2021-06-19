@@ -2,7 +2,7 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "login": "Joshua",
+    "login": "John",
     "password": "Password"
 }
 
@@ -15,3 +15,27 @@ Content-Type: application/json
     "login": "John",
     "password": "Password"
 }
+
+###
+
+POST http://localhost:5000/message
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQxMDcxNDN9.kYjbqnDpMM5HFesA6xATxPcMefQT0vUsg7wI6j2Gs14
+
+{
+    "content": "example message",
+    "target": 2
+}
+
+###
+POST http://localhost:5000/chat
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQxMTA3MjF9.-O-zW6QanNqTeI1OZ95_5YYQ0QG_FiK2OxuRdGl2_NY
+
+{
+    "name": "Room1"
+}
+
+###
+GET http://localhost:5000/chat
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQxMTA3MjF9.-O-zW6QanNqTeI1OZ95_5YYQ0QG_FiK2OxuRdGl2_NY

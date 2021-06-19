@@ -1,6 +1,7 @@
 import datetime
 import hashlib
 import os
+from flask.helpers import send_file
 
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, create_engine
 from sqlalchemy.orm import relationship
@@ -46,8 +47,16 @@ class Chat(Base):
     __tablename__ = "chats"
 
     id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(32))
     creator = Column(Integer, ForeignKey(User.id))
     messages = relationship("Message")
+
+    def to_dict(self):
+        return {'id': self.id, 'name': self.name, 'creator': self.creator}
+
+    def __init__(self, creator: User, name: str) -> None:
+        self.name = name
+        self.creator = creator.id
 
 
 class Message(Base):
@@ -58,6 +67,12 @@ class Message(Base):
     send_time = Column(DateTime, default=datetime.datetime.utcnow)
     sender_id = Column(Integer, ForeignKey(User.id), nullable=False)
     target_chat_id = Column(Integer, ForeignKey(Chat.id), nullable=False)
+
+    def __init__(self, creator: User, content: str, target: Chat):
+        self.content = content
+        self.sender_id = creator.id
+        self.target_chat_id = target.id
+
 
 
 class MessageReadedBy(Base):
