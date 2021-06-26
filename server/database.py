@@ -1,9 +1,10 @@
 import datetime
+import enum
 import hashlib
 import os
 from flask.helpers import send_file
 
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, create_engine
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Boolean, Enum, create_engine
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -49,14 +50,15 @@ class Chat(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(32))
     creator = Column(Integer, ForeignKey(User.id))
+    personal = Column(Boolean, default=False)
     messages = relationship("Message")
+    members = relationship(
+        "ChatMembership", primaryjoin="Chat.id==ChatMembership.chat_id", cascade="all, delete")
 
-    def to_dict(self):
-        return {'id': self.id, 'name': self.name, 'creator': self.creator}
-
-    def __init__(self, creator: User, name: str) -> None:
+    def __init__(self, creator_id: int, name: str, personal: bool = False) -> None:
         self.name = name
-        self.creator = creator.id
+        self.creator = creator_id
+        self.personal = personal
 
 
 class Message(Base):
@@ -68,11 +70,13 @@ class Message(Base):
     sender_id = Column(Integer, ForeignKey(User.id), nullable=False)
     target_chat_id = Column(Integer, ForeignKey(Chat.id), nullable=False)
 
+    def to_dict(self):
+        return {'id': self.id, 'content': self.content, 'send_time': self.send_time, 'sender_id': self.sender_id}
+
     def __init__(self, creator: User, content: str, target: Chat):
         self.content = content
         self.sender_id = creator.id
         self.target_chat_id = target.id
-
 
 
 class MessageReadedBy(Base):
@@ -91,6 +95,40 @@ class ChatMembership(Base):
                      nullable=False, primary_key=True)
     user_id = Column(Integer, ForeignKey(User.id),
                      nullable=False, primary_key=True)
+
+    def __init__(self, chat_id: int, user_id: int) -> None:
+        self.chat_id = chat_id
+        self.user_id = user_id
+
+
+class Friendships(Base):
+    __tablename__ = "friendships"
+
+    user_1 = Column(Integer, ForeignKey(User.id),
+                    nullable=False, primary_key=True)
+    user_2 = Column(Integer, ForeignKey(User.id),
+                    nullable=False, primary_key=True)
+
+
+class InvitationStatus(enum.Enum):
+    pending = 1
+    rejected = 2
+    accepted = 3
+
+
+class Invitation(Base):
+    __tablename__ = "invitations"
+
+    creator_user = Column(Integer, ForeignKey(User.id),
+                          nullable=False, primary_key=True)
+    target_user = Column(Integer, ForeignKey(User.id),
+                         nullable=False, primary_key=True)
+    status = Column(Enum(InvitationStatus), default=False)
+
+    def __init__(self, creator_user_ID: int, target_user_ID: int):
+        self.creator_user = creator_user_ID
+        self.target_user = target_user_ID
+        self.status = InvitationStatus.pending
 
 
 # temporary sollution for problem with not adding "IF NOT EXISTS" to sql executed by DB

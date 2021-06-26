@@ -16,26 +16,49 @@ Content-Type: application/json
     "password": "Password"
 }
 
-###
 
-POST http://localhost:5000/message
+###
+POST http://localhost:5000/invitate
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQxMDcxNDN9.kYjbqnDpMM5HFesA6xATxPcMefQT0vUsg7wI6j2Gs14
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3MjMzOTd9.QlijRZgK5KVPJZ6BRA_mhzDYdIQo3FMKKJc_wUH9oAk
 
 {
-    "content": "example message",
-    "target": 2
+    "user_id": 4
 }
 
+
 ###
-POST http://localhost:5000/chat
+GET http://localhost:5000/invitate
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3MjY1Nzl9.FJcjRpqw1ybhZQ9GjVAvkFIP0D3KAp2B6nngWdFsqbo
+
+###
+POST http://localhost:5000/accept_invitation
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQxMTA3MjF9.-O-zW6QanNqTeI1OZ95_5YYQ0QG_FiK2OxuRdGl2_NY
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3MjY1Nzl9.FJcjRpqw1ybhZQ9GjVAvkFIP0D3KAp2B6nngWdFsqbo
 
 {
-    "name": "Room1"
+    "user_id": 3
 }
 
 ###
 GET http://localhost:5000/chat
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQxMTA3MjF9.-O-zW6QanNqTeI1OZ95_5YYQ0QG_FiK2OxuRdGl2_NY
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3Mjg3NzZ9.6tD9gYXqylbz5QWAqRHdhEFmIj5Dl76o_06kMj8Px5I
+
+###
+POST http://localhost:5000/message
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3Mjg3NzZ9.6tD9gYXqylbz5QWAqRHdhEFmIj5Dl76o_06kMj8Px5I
+
+{
+    "target": 1,
+    "content": "example message 3"
+}
+
+###
+GET http://localhost:5000/message
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3Mjg3NzZ9.6tD9gYXqylbz5QWAqRHdhEFmIj5Dl76o_06kMj8Px5I
+
+{
+    "chat_id": 1
+}
