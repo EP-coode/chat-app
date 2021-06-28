@@ -12,53 +12,64 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "login": "John",
+    "login": "John1",
     "password": "Password"
 }
 
+###
+GET http://localhost:5000/users
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ4ODY5NzV9.OLgVwRXtOqP-tyMDPExcQ3uvZnRteU7nx2OuJ1eICKA
 
 ###
 POST http://localhost:5000/invitate
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3MjMzOTd9.QlijRZgK5KVPJZ6BRA_mhzDYdIQo3FMKKJc_wUH9oAk
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ4ODY5NzV9.OLgVwRXtOqP-tyMDPExcQ3uvZnRteU7nx2OuJ1eICKA
 
 {
-    "user_id": 4
+    "user_id": 2
 }
 
 
 ###
 GET http://localhost:5000/invitate
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3MjY1Nzl9.FJcjRpqw1ybhZQ9GjVAvkFIP0D3KAp2B6nngWdFsqbo
-
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
 ###
-POST http://localhost:5000/accept_invitation
+POST http://localhost:5000/invitate/accept
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3MjY1Nzl9.FJcjRpqw1ybhZQ9GjVAvkFIP0D3KAp2B6nngWdFsqbo
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
 
 {
-    "user_id": 3
+    "user_id": 1
 }
 
 ###
 GET http://localhost:5000/chat
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ4NzgyNjJ9.GICPi1FRc7FqRoTV_MiqQ5X2NMS87Mgmmnzh2UHL7z4
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
 
 ###
 POST http://localhost:5000/message
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ4NzgyNjJ9.GICPi1FRc7FqRoTV_MiqQ5X2NMS87Mgmmnzh2UHL7z4
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
 
 {
-    "target": 2,
-    "content": "yeeee 5"
+    "target": 1,
+    "content": "yeeee"
 }
 
 ###
 GET http://localhost:5000/message
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ4NzgyNjJ9.GICPi1FRc7FqRoTV_MiqQ5X2NMS87Mgmmnzh2UHL7z4
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
 
 {
     "chat_id": 1
+}
+
+###
+POST http://localhost:5000/message/status
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
+
+{
+    "msg_ids": [1]
 }

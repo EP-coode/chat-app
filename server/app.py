@@ -55,6 +55,16 @@ def login():
     return {"token": token}, 200
 
 
+# wysyła listę wszystkich nicków/loginów zarejestrowanych w bazie
+@app.route('/users', methods=['GET'])
+@require_token
+def gatAllUsers(token_payload):
+    users = user_tools.getAllUsers()
+    users = list(map(lambda usr: {'login': usr.login,'id': usr.id},users))
+
+    return {'users': users}, 200
+
+
 # wysyła listę aktywych chatów do klienta
 @app.route('/chat', methods=['GET'])
 @require_token
@@ -115,11 +125,26 @@ def message(token_payload):
                 'id': m.id,
                 'content': m.content,
                 'send_time': m.send_time, 
+                'readed': message_tools.isMesssageReaded(m.id,token_payload['id']),
                 'sender_name': user_tools.getUserById(m.sender_id).login
             })
 
         return {'messages': data_for_client}, 200
 
+
+@app.route('/message/status',methods=['POST'])
+@require_token
+def markMessage(token_payload):
+    user_id = token_payload['id']
+    data = request.get_json()
+
+    if not 'msg_ids' in data or not user_id:
+        return 'Bad request', 400
+
+    for msg_id in data['msg_ids']:
+        message_tools.markAsReaded(msg_id, user_id)
+
+    return 'succes', 201  
 
 # słóży do pobierania i wysyłania zaproszeń
 @app.route('/invitate', methods=['GET', 'POST'])
@@ -150,7 +175,7 @@ def invitate(token_payload):
 
 
 # słóży do akceptacji zaproszeń
-@app.route('/accept_invitation',  methods=['POST'])
+@app.route('/invitate/accept',  methods=['POST'])
 @require_token
 def acceptInv(token_payload):
     data = request.get_json()

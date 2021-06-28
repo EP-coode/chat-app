@@ -2,6 +2,15 @@ from sqlalchemy.orm import Session
 
 from database import DB_Session, User
 
+def getAllUsers():
+    session: Session = DB_Session()
+    try:
+        return session.query(User).all()
+    except:
+        return None
+    finally:
+        session.close()
+
 
 def loginUser(login: str, password: str) -> User:
     session: Session = DB_Session()

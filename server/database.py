@@ -70,7 +70,6 @@ class Message(Base):
     sender_id = Column(Integer, ForeignKey(User.id), nullable=False)
     target_chat_id = Column(Integer, ForeignKey(Chat.id), nullable=False)
 
-
     def __init__(self, creator: User, content: str, target: Chat):
         self.content = content
         self.sender_id = creator.id
@@ -84,6 +83,10 @@ class MessageReadedBy(Base):
                         nullable=False, primary_key=True)
     user_id = Column(Integer, ForeignKey(User.id),
                      nullable=False, primary_key=True)
+
+    def __init__(self,user_id: int, msg_id: int) -> None:
+        self.message_id = msg_id
+        self.user_id = user_id
 
 
 class ChatMembership(Base):
