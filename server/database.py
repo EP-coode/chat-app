@@ -70,8 +70,6 @@ class Message(Base):
     sender_id = Column(Integer, ForeignKey(User.id), nullable=False)
     target_chat_id = Column(Integer, ForeignKey(Chat.id), nullable=False)
 
-    def to_dict(self):
-        return {'id': self.id, 'content': self.content, 'send_time': self.send_time, 'sender_id': self.sender_id}
 
     def __init__(self, creator: User, content: str, target: Chat):
         self.content = content

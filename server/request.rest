@@ -42,22 +42,22 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6I
 
 ###
 GET http://localhost:5000/chat
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3Mjg3NzZ9.6tD9gYXqylbz5QWAqRHdhEFmIj5Dl76o_06kMj8Px5I
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ4NzgyNjJ9.GICPi1FRc7FqRoTV_MiqQ5X2NMS87Mgmmnzh2UHL7z4
 
 ###
 POST http://localhost:5000/message
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3Mjg3NzZ9.6tD9gYXqylbz5QWAqRHdhEFmIj5Dl76o_06kMj8Px5I
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ4NzgyNjJ9.GICPi1FRc7FqRoTV_MiqQ5X2NMS87Mgmmnzh2UHL7z4
 
 {
-    "target": 1,
-    "content": "example message 3"
+    "target": 2,
+    "content": "yeeee 5"
 }
 
 ###
 GET http://localhost:5000/message
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ3Mjg3NzZ9.6tD9gYXqylbz5QWAqRHdhEFmIj5Dl76o_06kMj8Px5I
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ4NzgyNjJ9.GICPi1FRc7FqRoTV_MiqQ5X2NMS87Mgmmnzh2UHL7z4
 
 {
     "chat_id": 1
