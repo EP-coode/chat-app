@@ -27,6 +27,17 @@ def isMemberOfChat(chat_id: int, user_id: int) -> bool:
         session.close()
 
 
+def getChatMembersIds(chat_id: int):
+    session: Session = DB_Session()
+    try:
+        memberships: ChatMembership = session.query(ChatMembership).filter(
+            ChatMembership.chat_id == chat_id).all()
+        return memberships
+    except:
+        return []
+    finally:
+        session.close()
+
 def addChat(chat: Chat):
     session: Session = DB_Session()
     try:

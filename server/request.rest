@@ -49,7 +49,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6I
 ###
 POST http://localhost:5000/message
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ5NTE0NzZ9.dYox_W6qA53ZNvZlQjk3JRAi8mZIpScUJ1DycsGpKYU
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ5NTQxMTZ9.r-UvV-ysoVmmkXyH8NFbWLb_2EyB8e2S_h1hOZ8zyLA
 
 {
     "target": 1,

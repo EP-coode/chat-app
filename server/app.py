@@ -3,15 +3,25 @@ import os
 
 from flask import Flask, request
 import jwt
+from flask_cors import CORS
+from flask_socketio import SocketIO, disconnect, rooms
 
-from database import Message, Chat
+from database import ChatMembership, Message, Chat
 from db_tools import user_tools, chat_tools, inventation_tools, message_tools
 from decorators import require_token
 
+# app config
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv(
     "TOKEN_SECRET", "yoursuperstrongpassword123")
 
+cors = CORS(app)
+
+sio = SocketIO(app, always_connect=True, cors_allowed_orgins='*')
+
+# websocket stuff
+user_sid = {}
+sid_user = {}
 
 @app.route('/ping', methods=['GET'])
 def pong():
@@ -104,6 +114,12 @@ def message(token_payload):
         message = Message(user, data['content'], target_chat)
 
         if message_tools.sendMessage(message):
+            membersips = chat_tools.getChatMembersIds(target_chat.id)
+            
+            for m in membersips:
+                if m.user_id in user_sid:
+                    sio.emit('new_message', target_chat.id, room=user_sid[m.user_id])
+
             return 'succes', 201
 
         return 'fail', 400  # może inny error code ?
@@ -192,6 +208,37 @@ def acceptInv(token_payload):
     return 'fail', 400
 
 
+# ================================ web-sockets =========================================
+
+@sio.on('connect')
+def connSocket():
+    try: 
+        data = jwt.decode(request.args.get('token'), app.config['SECRET_KEY'])
+    except:
+        disconnect(sid=request.sid)
+        raise ConnectionRefusedError('unauthorized')
+    
+    print("Connecting: " + str(request.sid))
+    if 'id' in data:
+        user_id = data['id']
+        #updateStatus(user_id, active=True)
+        user_sid[user_id] = request.sid
+        sid_user[request.sid] = user_id
+
+
+@sio.on('disconnect')
+def discSocket():
+    #updateStatus(sid_user[request.sid], active = False)
+    del user_sid[sid_user[request.sid]]
+    del sid_user[request.sid]
+
+# def updateStatus(user_id: int, active: bool):
+#     sio.emit('')
+
+
+# ================================ web-sockets =========================================
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    sio.run(app, host='0.0.0.0', port=port)
+    #app.run(debug=True, host='0.0.0.0', port=port)
