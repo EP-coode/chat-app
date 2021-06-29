@@ -58,7 +58,7 @@ def login():
 # wysyła listę wszystkich nicków/loginów zarejestrowanych w bazie
 @app.route('/users', methods=['GET'])
 @require_token
-def gatAllUsers(token_payload):
+def getAllUsers(token_payload):
     users = user_tools.getAllUsers()
     users = list(map(lambda usr: {'login': usr.login,'id': usr.id},users))
 
@@ -68,14 +68,16 @@ def gatAllUsers(token_payload):
 # wysyła listę aktywych chatów do klienta
 @app.route('/chat', methods=['GET'])
 @require_token
-def room(token_payload):
+def getChatList(token_payload):
     chatlist = chat_tools.getChatList(token_payload['id'])
 
-    if not chatlist:
-        'Unknown error', 500
-
     chatlist = list(
-        map(lambda inv: {'id': inv.id, 'name': inv.name, 'inv': inv.creator}, chatlist))
+        map(lambda inv: {
+            'id': inv.id, 
+            'name': inv.name, 
+            'inv': inv.creator, 
+            'new_messages': chat_tools.getNewMessagesCount(token_payload['id'], inv.id)
+            }, chatlist))
         
     return {'chatlist': chatlist}, 200
 

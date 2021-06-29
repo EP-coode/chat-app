@@ -30,8 +30,7 @@ def sendMessage(message: Message) -> bool:
     return True
 
 
-def isMesssageReaded(message_id: int, user_id: int):
-    session: Session = DB_Session()
+def isMesssageReaded(message_id: int, user_id: int, session: Session = DB_Session()):
     try:
         message: Message = session.query(Message).filter(Message.id == message_id).first()
         if message.sender_id == user_id:

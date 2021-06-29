@@ -2,7 +2,7 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "login": "John",
+    "login": "John1",
     "password": "Password"
 }
 
@@ -12,18 +12,18 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "login": "John1",
+    "login": "John",
     "password": "Password"
 }
 
 ###
 GET http://localhost:5000/users
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ4ODY5NzV9.OLgVwRXtOqP-tyMDPExcQ3uvZnRteU7nx2OuJ1eICKA
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ5NTEzNTZ9.ptZ9-l9cd3-YLFN9ZoiHWZDZrVc_t1OpvWs5at_A7Mk
 
 ###
 POST http://localhost:5000/invitate
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ4ODY5NzV9.OLgVwRXtOqP-tyMDPExcQ3uvZnRteU7nx2OuJ1eICKA
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ5NTEzNTZ9.ptZ9-l9cd3-YLFN9ZoiHWZDZrVc_t1OpvWs5at_A7Mk
 
 {
     "user_id": 2
@@ -32,11 +32,11 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6I
 
 ###
 GET http://localhost:5000/invitate
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0OTUxMzg2fQ.S3ed2Y-6vji43eAYkskjw-dx2d0TizMdH0HQtsCUXy0
 ###
 POST http://localhost:5000/invitate/accept
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0OTUxMzg2fQ.S3ed2Y-6vji43eAYkskjw-dx2d0TizMdH0HQtsCUXy0
 
 {
     "user_id": 1
@@ -44,12 +44,12 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6I
 
 ###
 GET http://localhost:5000/chat
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ5NTE0NzZ9.dYox_W6qA53ZNvZlQjk3JRAi8mZIpScUJ1DycsGpKYU
 
 ###
 POST http://localhost:5000/message
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ5NTE0NzZ9.dYox_W6qA53ZNvZlQjk3JRAi8mZIpScUJ1DycsGpKYU
 
 {
     "target": 1,
@@ -59,7 +59,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6I
 ###
 GET http://localhost:5000/message
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ5NTE0NzZ9.dYox_W6qA53ZNvZlQjk3JRAi8mZIpScUJ1DycsGpKYU
 
 {
     "chat_id": 1
@@ -68,7 +68,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6I
 ###
 POST http://localhost:5000/message/status
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI0ODg3MDIyfQ.CXS1RmRAaoQ7GUVmf9AGQKTtbHAZvECiCiHyYkdjq_Y
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjQ5NTE0NzZ9.dYox_W6qA53ZNvZlQjk3JRAi8mZIpScUJ1DycsGpKYU
 
 {
     "msg_ids": [1]

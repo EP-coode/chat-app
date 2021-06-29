@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from database import DB_Session, User, Chat, Chat, ChatMembership
+from database import DB_Session, Message, MessageReadedBy, User, Chat, Chat, ChatMembership
 
 
 def getChatById(id: int) -> Chat:
@@ -39,6 +39,19 @@ def addChat(chat: Chat):
         session.close()
 
     return True
+
+
+def getNewMessagesCount(user_id: int, chat_id: int):
+    session: Session = DB_Session()
+    try:
+        count = session.query(Message).filter(Message.target_chat_id == chat_id, Message.sender_id != user_id).join(
+            MessageReadedBy, MessageReadedBy.message_id == Message.id, isouter = True
+        ).filter(MessageReadedBy.message_id == None).count()
+        return count
+    except:
+        return None
+    finally:
+        session.close()
 
 
 def getChatList(user_id: int):
