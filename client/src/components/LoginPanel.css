@@ -1,0 +1,93 @@
+.login-panel-container{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/src/images/trees.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.login-panel{
+    display: flex;
+    flex-direction: column;
+
+    /* Center div */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* div size */
+    width: 350px;
+    padding: 30px;
+
+    margin: 0 auto;
+    
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    background-color: var(--background);
+
+    font-size: 20px;
+}
+
+.login-panel__title{
+    display: block;
+    text-align: center;
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid var(--main-color);
+
+    font-size: 2em;
+}
+
+.login-panel__input-group{
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.login-panel__label{
+    display: block;
+    margin: 8px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.login-panel__input{
+    width: 100%;
+
+    padding: 10px;
+    border-radius: 2px;
+
+    box-shadow: 0px 0px 1px 1px var(--main-color);
+
+    background-color: rgb(240, 240, 240);
+
+    font-size: 1em;
+}
+
+/* do zastanowienia 
+    Jak zrobić lepiej dziedziczenie stylów?
+    Problem z niepoprawnym dziedziczeniem. 
+*/
+.login-panel__login-btn{
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.login-panel__register-btn{
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.login-panel__response-box{
+    color: red;
+    text-transform: lowercase;
+    text-align: center;
+}
+
+.login-panel__btn-container{
+    margin: 20px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}

@@ -23,6 +23,7 @@ sio = SocketIO(app, always_connect=True, cors_allowed_orgins='*')
 user_sid = {}
 sid_user = {}
 
+
 @app.route('/ping', methods=['GET'])
 def pong():
     return 'pong', 200
@@ -45,6 +46,8 @@ def register():
 
 # przydał by się refresh token
 # czas życia tokena można przenioeść do zm środowiskowych
+
+
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -70,7 +73,7 @@ def login():
 @require_token
 def getAllUsers(token_payload):
     users = user_tools.getAllUsers()
-    users = list(map(lambda usr: {'login': usr.login,'id': usr.id},users))
+    users = list(map(lambda usr: {'login': usr.login, 'id': usr.id}, users))
 
     return {'users': users}, 200
 
@@ -83,12 +86,12 @@ def getChatList(token_payload):
 
     chatlist = list(
         map(lambda inv: {
-            'id': inv.id, 
-            'name': inv.name, 
-            'inv': inv.creator, 
+            'id': inv.id,
+            'name': inv.name,
+            'inv': inv.creator,
             'new_messages': chat_tools.getNewMessagesCount(token_payload['id'], inv.id)
-            }, chatlist))
-        
+        }, chatlist))
+
     return {'chatlist': chatlist}, 200
 
 
@@ -109,16 +112,17 @@ def message(token_payload):
             return 'Bad request', 400
 
         if not target_chat:
-            return 'Target chat not found', 404 # może inny error code ?
+            return 'Target chat not found', 404  # może inny error code ?
 
         message = Message(user, data['content'], target_chat)
 
         if message_tools.sendMessage(message):
             membersips = chat_tools.getChatMembersIds(target_chat.id)
-            
+
             for m in membersips:
                 if m.user_id in user_sid:
-                    sio.emit('new_message', target_chat.id, room=user_sid[m.user_id])
+                    sio.emit('new_message', target_chat.id,
+                             room=user_sid[m.user_id])
 
             return 'succes', 201
 
@@ -142,15 +146,15 @@ def message(token_payload):
             data_for_client.append({
                 'id': m.id,
                 'content': m.content,
-                'send_time': m.send_time, 
-                'readed': message_tools.isMesssageReaded(m.id,token_payload['id']),
+                'send_time': m.send_time,
+                'readed': message_tools.isMesssageReaded(m.id, token_payload['id']),
                 'sender_name': user_tools.getUserById(m.sender_id).login
             })
 
         return {'messages': data_for_client}, 200
 
 
-@app.route('/message/status',methods=['POST'])
+@app.route('/message/status', methods=['POST'])
 @require_token
 def markMessage(token_payload):
     user_id = token_payload['id']
@@ -162,9 +166,11 @@ def markMessage(token_payload):
     for msg_id in data['msg_ids']:
         message_tools.markAsReaded(msg_id, user_id)
 
-    return 'succes', 201  
+    return 'succes', 201
 
 # słóży do pobierania i wysyłania zaproszeń
+
+
 @app.route('/invitate', methods=['GET', 'POST'])
 @require_token
 def invitate(token_payload):
@@ -212,12 +218,12 @@ def acceptInv(token_payload):
 
 @sio.on('connect')
 def connSocket():
-    try: 
+    try:
         data = jwt.decode(request.args.get('token'), app.config['SECRET_KEY'])
     except:
         disconnect(sid=request.sid)
         raise ConnectionRefusedError('unauthorized')
-    
+
     print("Connecting: " + str(request.sid))
     if 'id' in data:
         user_id = data['id']
