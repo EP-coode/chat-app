@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react';
-import {
-    Redirect
-} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { login, register, OK, CONFILCT, WRONG_CREDENTIALS } from '../api/auth';
 import { AuthContext } from '../context/AuthContext';
@@ -12,11 +10,16 @@ const LoginPanel = () => {
     const error_style = { color: 'red' }
     const message_style = { color: 'green' }
 
+    const { tokenPayload, setToken } = useContext(AuthContext)
+
+    const history = useHistory()
+
+    if (tokenPayload)
+        history.push('/')
+
     const [loginInput, setLoginInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
     const [resoponseMessage, setResponseMessage] = useState({ content: '', style: error_style })
-
-    const { tokenPayload, setToken } = useContext(AuthContext)
 
     const onLoginInput = e => {
         setResponseMessage({ content: '', style: error_style })
@@ -34,7 +37,6 @@ const LoginPanel = () => {
 
             switch (status) {
                 case OK:
-                    alert('Zalogowano', response.token)
                     setToken(response.token)
                     break
                 case WRONG_CREDENTIALS:
@@ -78,7 +80,6 @@ const LoginPanel = () => {
 
     return (
         <div className="login-panel-container">
-            {tokenPayload ? <Redirect to='/' /> : null}
 
             <form className="login-panel">
                 <h2 className="login-panel__title">

@@ -1,19 +1,18 @@
 import React, { useContext } from 'react';
+import { Redirect, useHistory } from 'react-router'
 
-import { AuthContext } from '../context/AuthContext'
+import ChatsPanel from '../components/ChatsPanel'
+import { AuthContext } from '../context/AuthContext';
 
 function UserPanel() {
-    const { unsetToken } = useContext(AuthContext)
+    const { tokenPayload } = useContext(AuthContext)
 
+    if (!tokenPayload)
+        return (<Redirect to="/login"/>)
 
     return (
         <div className='user-panel'>
-            yee
-            <button
-                className='btn'
-                onClick={unsetToken}>
-                wyloguj
-            </button>
+            <ChatsPanel />
         </div>
     )
 }

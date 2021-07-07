@@ -8,7 +8,7 @@ const AuthProvider = ({ children }) => {
 
     const setToken = token =>{
         const decoded = jwt_decode(token)
-        setTokenPayload(decoded)
+        setTokenPayload({...decoded, token})
     }
 
     const unsetToken = () =>{

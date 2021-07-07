@@ -177,7 +177,7 @@ def invitate(token_payload):
     if request.method == 'GET':
         invitations = inventation_tools.getInvitations(token_payload['id'])
         invitations = list(
-            map(lambda inv: {'user_id': inv.creator_user, 'status': inv.status.name}, invitations))
+            map(lambda inv: {'status': inv.status.name, 'user': {'id': inv.creator_user, 'login': user_tools.getUserById(inv.creator_user).login}}, invitations))
 
         return {'invitations': invitations}, 200
 

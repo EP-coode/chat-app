@@ -1,24 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
-  Redirect,
   Route,
   Switch
 } from 'react-router-dom'
 
 import LoginPanel from './components/LoginPanel'
-import UserPanel from './layouts/userPanel'
-import { AuthContext } from './context/AuthContext';
+import UserPanel from './layouts/UserPanel'
 import './App.css'
 
 
 function App() {
-  const { tokenPayload } = useContext(AuthContext)
 
   return (
     <div className="App">
       <Router>
-        {!tokenPayload ? <Redirect to="/login" /> : null}
         <Switch>
           <Route
             component={LoginPanel}
