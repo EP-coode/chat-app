@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import {
+    Redirect
+} from 'react-router-dom'
 
 import { login, register, OK, CONFILCT, WRONG_CREDENTIALS } from '../api/auth';
+import { AuthContext } from '../context/AuthContext';
 import './LoginPanel.css'
 
 
@@ -12,6 +16,7 @@ const LoginPanel = () => {
     const [passwordInput, setPasswordInput] = useState('')
     const [resoponseMessage, setResponseMessage] = useState({ content: '', style: error_style })
 
+    const { tokenPayload, setToken } = useContext(AuthContext)
 
     const onLoginInput = e => {
         setResponseMessage({ content: '', style: error_style })
@@ -25,12 +30,12 @@ const LoginPanel = () => {
 
     const handleLoginClick = e => {
         e.preventDefault()
-        debugger
         login(loginInput, passwordInput).then(([status, response]) => {
 
             switch (status) {
                 case OK:
                     alert('Zalogowano', response.token)
+                    setToken(response.token)
                     break
                 case WRONG_CREDENTIALS:
                     setResponseMessage({
@@ -73,6 +78,8 @@ const LoginPanel = () => {
 
     return (
         <div className="login-panel-container">
+            {tokenPayload ? <Redirect to='/' /> : null}
+
             <form className="login-panel">
                 <h2 className="login-panel__title">
                     Zaloguj
