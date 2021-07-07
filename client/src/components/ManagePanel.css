@@ -1,0 +1,55 @@
+.manage-panel{
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 0 0 5px 5px var(--main-color-dark);
+    background-color: var(--bg-secondary);
+}
+
+.manage-panel__about-user-container{
+    font-display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    text-align: center;
+    
+    border-bottom: 5px solid var(--main-color-dark);
+
+    padding: 20px;
+}
+
+.manage-panel__logout-btn{
+    margin-top: 10px;
+}
+
+.manage-panel__chatlist{
+    list-style: none;
+
+    flex-grow: 1;
+    padding: 5px;
+    overflow-y: auto;
+
+    border-bottom: 5px solid  var(--main-color-dark);
+}
+
+.manage-panel__chat{
+    display: flex;
+    margin: 10px;
+    user-select: none;
+}
+
+.manage-panel__chat--active{
+    background-color: var(--main-color);
+}
+
+.manage-panel__chat-name{
+    display: inline-block;
+    text-align: right;
+    flex-grow: 1;
+}
+
+.manage-panel__add-friend-btn{
+    margin: 10px;
+}

@@ -1,0 +1,5 @@
+.user-panel{
+    background-image: url('/src/images/landscape.jpg');
+    display: flex;
+    flex-direction: row;
+}

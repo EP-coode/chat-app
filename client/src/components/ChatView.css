@@ -1,0 +1,33 @@
+.chat{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    background-color: var(--bg-secondary);
+    border-radius: 20px;
+    flex-grow: 1;
+}
+
+.chat__tilte-container{
+    border-bottom: 5px solid var(--main-color-dark);
+    padding: 10px;
+    text-align: right;
+}
+
+.chat__messages-container{
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.chat__typing-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.chat__text-input{
+    flex-grow:  1;
+    font-size: 2em;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+}

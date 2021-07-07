@@ -18,28 +18,27 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/users
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTQsInVzZXIiOiJKYW4xIiwiZXhwIjoxNjI1NjYwNTI2fQ.wlgSw-ntt6TYZ2mWKYmlNHhD0Ly2Hx3nRJaJeGxyBoY
-
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTQsInVzZXIiOiJKYW4xIiwiZXhwIjoxNjI1NjczMzg3fQ.ruDUujXDIqaQGDrKBtOpVCRjkkilU6tqjjM9JN_8gX4
 ###
 POST http://localhost:5000/invitate
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTQsInVzZXIiOiJKYW4xIiwiZXhwIjoxNjI1NjYwNTI2fQ.wlgSw-ntt6TYZ2mWKYmlNHhD0Ly2Hx3nRJaJeGxyBoY
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwidXNlciI6IkpvaG4xIiwiZXhwIjoxNjI1NjczNDIxfQ.ABlJ35Ju_hXbWXGL3AT14vK0By5eTVumLp2srDDzng8
 
 {
-    "user_id": 1
+    "user_id": 14
 }
 
 
 ###
 GET http://localhost:5000/invitate
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjU2NjA1NzZ9.IXXzhp1H9Xqknjagt8ehHnmBNixrrVakMlJRdFZp7i8
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTQsInVzZXIiOiJKYW4xIiwiZXhwIjoxNjI1NjczNDU1fQ.48GDN_rXgA7b7K9Q1Q9pjVmMb0m-s2b6PNCi4C8e2yM
 ###
 POST http://localhost:5000/invitate/accept
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlciI6IkpvaG4iLCJleHAiOjE2MjU2NjA1NzZ9.IXXzhp1H9Xqknjagt8ehHnmBNixrrVakMlJRdFZp7i8
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTQsInVzZXIiOiJKYW4xIiwiZXhwIjoxNjI1NjczNDU1fQ.48GDN_rXgA7b7K9Q1Q9pjVmMb0m-s2b6PNCi4C8e2yM
 
 {
-    "user_id": 14
+    "user_id": 2
 }
 
 ###
