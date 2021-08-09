@@ -129,12 +129,12 @@ def message(token_payload):
         return 'fail', 400  # może inny error code ?
 
     if request.method == 'GET':
-        data = request.get_json()
+        chat_id = request.args.get('chat_id')
 
-        if not 'chat_id' in data:
+        if not chat_id:
             return 'Bad request', 400
 
-        chat: Chat = chat_tools.getChatById(data['chat_id'])
+        chat: Chat = chat_tools.getChatById(chat_id)
 
         if not chat_tools.isMemberOfChat(chat.id, token_payload['id']):
             return 'you are not member of this chat', 403

@@ -23,7 +23,7 @@ function UserPanel() {
                 selectedChat.id > 0 &&
                 <ChatView
                     name={selectedChat.name}
-                    user_id={selectedChat.id}
+                    chat_id={selectedChat.id}
                 />
             }   
 
