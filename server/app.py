@@ -6,7 +6,7 @@ import jwt
 from flask_cors import CORS
 from flask_socketio import SocketIO, disconnect, rooms
 
-from database import ChatMembership, Message, Chat
+from database import Message, Chat
 from db_tools import user_tools, chat_tools, inventation_tools, message_tools
 from decorators import require_token
 
@@ -17,7 +17,7 @@ app.config['SECRET_KEY'] = os.getenv(
 
 cors = CORS(app)
 
-sio = SocketIO(app, always_connect=True, cors_allowed_orgins='*')
+sio = SocketIO(app, always_connect=True, cors_allowed_origins='*')
 
 # websocket stuff
 user_sid = {}
@@ -121,7 +121,9 @@ def message(token_payload):
 
             for m in membersips:
                 if m.user_id in user_sid:
-                    sio.emit('new_message', target_chat.id,
+                    sio.emit('new_message', {
+                            'target_chat': target_chat.id
+                        },
                              room=user_sid[m.user_id])
 
             return 'succes', 201
@@ -219,7 +221,8 @@ def acceptInv(token_payload):
 @sio.on('connect')
 def connSocket():
     try:
-        data = jwt.decode(request.args.get('token'), app.config['SECRET_KEY'])
+        data = jwt.decode(request.args.get('token'),
+                          app.config['SECRET_KEY'], algorithms=["HS256"])
     except:
         disconnect(sid=request.sid)
         raise ConnectionRefusedError('unauthorized')

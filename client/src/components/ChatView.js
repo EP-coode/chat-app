@@ -5,14 +5,11 @@ import { getMessagesFromChat, sendMessage } from '../api/chating'
 import Message from './Message'
 import './ChatView.css'
 
-function ChatView({ name, chat_id }) {
+function ChatView({ name, chat_id, socket }) {
     const { tokenPayload } = useContext(AuthContext)
     const messageInput = useRef(null)
-    
-    const [ messages, setMessages ] = useState([])
-    useEffect(() => {
-       reloadMessages()
-    }, [tokenPayload.token, chat_id])
+    const chatBottom = useRef(null)
+    const [messages, setMessages] = useState([])
 
     const reloadMessages = () => {
         getMessagesFromChat(tokenPayload.token, chat_id).then(([status, data]) => {
@@ -21,27 +18,42 @@ function ChatView({ name, chat_id }) {
         })
     }
 
+    useEffect(()=>{
+        if(chatBottom)
+        {
+            chatBottom.current.scrollIntoView()
+        }
+    },[messages])
+
+    useEffect(() => {
+        reloadMessages()
+    }, [tokenPayload.token, chat_id])
+
+    useEffect(()=>{
+        socket.on('new_message', ()=> {reloadMessages();console.log('yee');})
+        return () => {socket.off('new_message')}
+    }, [reloadMessages])
+
+
     const handleSend = () => {
         const message = messageInput.current.value
-        if(message)
-        {
+        if (message) {
             sendMessage(tokenPayload.token, chat_id, message).then(([status, data]) => {
-                console.log(data) 
+                console.log(data)
             })
             messageInput.current.value = ""
         }
     }
 
-  
     const messagesComp = messages.map(msg => {
-            return (
-                <Message
-                    sender_name={msg.sender_name}
-                    content={msg.content}
-                    date={msg.send_time}
-                    isMine={tokenPayload.user == msg.sender_name}
-                />
-            )
+        return (
+            <Message
+                sender_name={msg.sender_name}
+                content={msg.content}
+                date={msg.send_time}
+                isMine={tokenPayload.user == msg.sender_name}
+            />
+        )
     })
 
     return (
@@ -53,6 +65,7 @@ function ChatView({ name, chat_id }) {
             </div>
             <ul className='chat__messages-container'>
                 {messagesComp}
+                <div ref={chatBottom}></div>
             </ul>
             <div className='chat__typing-container'>
                 <input className='chat__text-input' type='text' ref={messageInput} />

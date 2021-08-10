@@ -15,11 +15,13 @@ db_user = os.getenv("db_user", "root")
 db_password = os.getenv("db_password", "example")
 db_host = os.getenv("db_host", "127.0.0.1")
 db_port = os.getenv("db_port", "3306")
+db_name = os.getenv('db_name', 'messenger')
 
-engine = create_engine("mysql+pymysql://{}:{}@{}:{}".format(
-    db_user, db_password, db_host, db_port
+engine = create_engine("mysql+pymysql://{}:{}@{}:{}/{}".format(
+    db_user, db_password, db_host, db_port, db_name
 ))
 
+# trzeba to zmienić
 engine.execute(r"CREATE DATABASE IF NOT EXISTS messenger")
 engine.execute(r"USE messenger")
 

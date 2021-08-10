@@ -84,7 +84,8 @@ def getChatList(user_id: int):
 
                 if other_member:
                     chat.name = other_member.login
-    except:
+    except Exception as e:
+        print(e)
         return None
     finally:
         session.close()
