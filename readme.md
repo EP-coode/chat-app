@@ -18,6 +18,6 @@ Prosta aplikacja typu chat, powstała w celu treningu technologi frontendowych. 
 
 ## Zrzuty z ekranu
 
-    ![Logowanie](/docs/login.png)
-    ![Ekran główny](/docs/login.png)
+   ![Ekran logowania](./docs/login.png)
+   ![Ekran główny](./docs/chat.png)
     
